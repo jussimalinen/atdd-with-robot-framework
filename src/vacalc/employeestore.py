@@ -57,9 +57,9 @@ class EmployeeStore(object):
     def _serialize(self, employee):
         if not self._db_file:
             return
-        with codecs.open(self._db_file, 'a', encoding='UTF-8') as db:
+        with open(self._db_file, 'a') as db:
             writer = csv.writer(db, lineterminator='\n')
-            writer.writerow([employee.name, employee.startdate])
+            writer.writerow([employee.name.encode('utf-8'), employee.startdate])
 
     def _parse_date(self, datestring):
         if not datestring:
